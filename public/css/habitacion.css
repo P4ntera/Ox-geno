@@ -1,0 +1,124 @@
+.habitaciones-page {
+    padding: 32px 40px;
+}
+
+.habitaciones-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+}
+
+.habitaciones-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.habitaciones-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: #ffece5;
+    color: #d9480f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.habitaciones-icon svg {
+    width: 22px;
+    height: 22px;
+}
+
+.habitaciones-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.habitaciones-subtitle {
+    font-size: 14px;
+    color: #6b7280;
+    margin: 0;
+}
+
+/* Botón */
+.btn-nueva-habitacion {
+    background: #0f172a;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-size: 14px;
+}
+
+.btn-nueva-habitacion:hover {
+    background: #1e293b;
+}
+
+.habitaciones-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 18px;
+    box-shadow: 0 15px 40px rgba(0,0,0,.05);
+}
+
+/* Buscador */
+.habitaciones-search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    margin-bottom: 16px;
+}
+
+.search-input {
+    border: none;
+    flex: 1;
+    background: transparent;
+    outline: none;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.habitaciones-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.habitaciones-table th {
+    background: #f9fafb;
+    padding: 12px;
+    font-weight: 600;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.habitaciones-table td {
+    padding: 12px;
+}
+
+.habitaciones-table tbody tr:hover {
+    background: #f9fafb;
+}
+
+.btn-icon-ghost {
+    background: transparent;
+    border: none;
+    padding: 6px;
+    border-radius: 8px;
+}
+
+.btn-icon-ghost:hover {
+    background: #e5e7eb;
+}
+
+.sin-registros {
+    text-align: center;
+    padding: 16px;
+    color: #9ca3af;
+}

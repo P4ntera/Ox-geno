@@ -1,0 +1,271 @@
+/* CONTENEDOR GENERAL */
+
+.badge-status {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.badge-status.activo {
+  background-color: #d1fae5; /* verde claro */
+  color: #065f46; /* verde oscuro */
+}
+
+.badge-status.inactivo {
+  background-color: #f3f4f6; /* gris claro */
+  color: #1f2937; /* gris oscuro */
+}
+
+.usuarios-page {
+  padding: 20px 20px;
+  color: #111827;
+}
+
+/* HEADER */
+.usuarios-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.usuarios-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.usuarios-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background-color: #ecfdf3;
+  color: #15803d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.usuarios-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.usuarios-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.usuarios-subtitle {
+  margin: 2px 0 0;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* BOTÓN NUEVO USUARIO */
+.btn-nuevo-usuario {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: none;
+  background-color: #2563eb;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 10px 15px rgba(37, 99, 235, 0.18);
+}
+
+.btn-nuevo-usuario:hover {
+  background-color: #1d4ed8;
+  color: #ffffff;
+}
+
+.btn-nuevo-usuario svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* CARD PRINCIPAL */
+.usuarios-card {
+  background-color: #ffffff;
+  border-radius: 18px;
+  padding: 20px 18px;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.06);
+}
+
+/* BUSCADOR */
+.usuarios-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+  margin-bottom: 16px;
+}
+
+.usuarios-search .search-icon {
+  width: 16px;
+  height: 16px;
+  color: #9ca3af;
+}
+
+.usuarios-search .search-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  flex: 1;
+  font-size: 14px;
+  color: #111827;
+}
+
+/* TABLA */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.usuarios-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.usuarios-table thead {
+  background-color: #f9fafb;
+}
+
+.usuarios-table th,
+.usuarios-table td {
+  padding: 10px 8px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.usuarios-table th {
+  font-weight: 700;
+  font-size: 15px;
+  color: #000000;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.usuarios-table tbody tr {
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.usuarios-table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.usuarios-table tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+/* CELDA: SIN REGISTROS */
+.sin-registros {
+  text-align: center;
+  padding: 18px 0;
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+/* BADGE ROL */
+.badge-rol {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background-color: #dbeafe;
+  color: #1d4ed8;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* BOTONES ICONO (EDITAR / ELIMINAR) */
+.btn-icon-ghost {
+  border: none;
+  background-color: transparent;
+  padding: 6px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-icon-ghost:hover {
+  background-color: #e5e7eb;
+}
+
+.btn-icon-ghost svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* MODAL */
+.modal-content {
+  border-radius: 18px;
+  border: none;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.25);
+}
+
+.modal-header {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.modal-title {
+  font-weight: 600;
+}
+
+.modal-subtitle {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 12px;
+}
+
+.modal-footer {
+  border-top: 0;
+}
+
+/* INPUTS DEL MODAL */
+.form-label {
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.form-control,
+.form-select {
+  font-size: 14px;
+  border-radius: 10px;
+}
+
+.form-control:focus,
+.form-select:focus {
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+  border-color: #2563eb;
+}
+
+/* ADAPTATIVO */
+@media (max-width: 992px) {
+  .usuarios-page {
+    padding: 20px 16px;
+  }
+
+  .usuarios-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .btn-nuevo-usuario {
+    align-self: stretch;
+    justify-content: center;
+  }
+}

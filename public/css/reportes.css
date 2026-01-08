@@ -1,0 +1,75 @@
+.reportes-page {
+    padding: 1.5rem;
+}
+
+.reportes-header {
+    margin-bottom: 1.5rem;
+}
+
+.reportes-header-left {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.reportes-icon {
+    width: 48px;
+    height: 48px;
+    background: #16a34a;
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.reportes-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.reportes-filtros {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.reportes-kpis {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.kpi-card {
+    background: #f9fafb;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.reportes-tabs {
+    display: flex;
+    gap: .5rem;
+    margin-bottom: 1rem;
+}
+
+.reportes-tabs .tab {
+    padding: .45rem .9rem;
+    border-radius: 999px;
+    border: none;
+    background: #e5e7eb;
+}
+
+.reportes-tabs .tab.active {
+    background: #16a34a;
+    color: white;
+}
+
+.tab-content {
+    display: none;
+}
+.tab-content.active {
+    display: block;
+}

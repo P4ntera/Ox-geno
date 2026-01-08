@@ -1,0 +1,291 @@
+/* ============================
+   CONTENEDOR GENERAL
+============================ */
+
+.pacientes-page {
+    padding: 32px 40px;
+    color: #111827;
+}
+
+/* ============================
+   HEADER
+============================ */
+
+.pacientes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.pacientes-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.pacientes-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background-color: #1d4ed8;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pacientes-icon svg {
+    width: 28px;
+    height: 28px;
+}
+
+.pacientes-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.pacientes-subtitle {
+    margin: 2px 0 0;
+    font-size: 14px;
+    color: #6b7280;
+}
+
+
+/* ============================
+   BOTÓN NUEVO PACIENTE
+============================ */
+
+.btn-nuevo-paciente {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    border: none;
+    background-color: #2563eb;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 10px 15px rgba(37, 99, 235, 0.18);
+    transition: 0.2s;
+}
+
+.btn-nuevo-paciente:hover {
+    background-color: #1d4ed8;
+}
+
+.btn-nuevo-paciente svg {
+    width: 18px;
+    height: 18px;
+}
+
+
+/* ============================
+   CARD PRINCIPAL
+============================ */
+
+.pacientes-card {
+    background-color: #ffffff;
+    border-radius: 18px;
+    padding: 20px 18px;
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.06);
+}
+
+
+/* ============================
+   BUSCADOR
+============================ */
+
+.pacientes-search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid #e5e7eb;
+    background-color: #f9fafb;
+    margin-bottom: 16px;
+}
+
+.search-icon {
+    width: 16px;
+    height: 16px;
+    color: #9ca3af;
+}
+
+.search-input {
+    border: none;
+    background: transparent;
+    outline: none;
+    flex: 1;
+    font-size: 14px;
+    color: #111827;
+}
+
+
+/* ============================
+   TABLA
+============================ */
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.pacientes-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.pacientes-table thead {
+    background-color: #f9fafb;
+}
+
+.pacientes-table th,
+.pacientes-table td {
+    padding: 12px 8px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.pacientes-table th {
+    font-weight: 700;
+    font-size: 15px;
+    color: #000000;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.pacientes-table tbody tr {
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.pacientes-table tbody tr:last-child {
+    border-bottom: none;
+}
+
+.pacientes-table tbody tr:hover {
+    background-color: #f9fafb;
+}
+
+
+/* ============================
+   ACCIONES
+============================ */
+
+.btn-icon-ghost {
+    border: none;
+    background-color: transparent;
+    padding: 6px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-icon-ghost:hover {
+    background-color: #e5e7eb;
+}
+
+.btn-icon-ghost svg {
+    width: 18px;
+    height: 18px;
+}
+
+.text-danger svg {
+    color: #dc2626;
+}
+
+
+/* ============================
+   SIN REGISTROS
+============================ */
+
+.sin-registros {
+    text-align: center;
+    padding: 18px 0;
+    font-size: 14px;
+    color: #9ca3af;
+}
+
+
+/* ============================
+   MODAL
+============================ */
+
+.modal-content {
+    border-radius: 18px;
+    border: none;
+    box-shadow: 0 18px 45px rgba(15, 23, 42, 0.25);
+}
+
+.modal-header {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+.modal-title {
+    font-weight: 600;
+}
+
+.modal-subtitle {
+    font-size: 13px;
+    color: #6b7280;
+    margin-bottom: 12px;
+}
+
+.modal-footer {
+    border-top: 0;
+}
+
+
+/* ============================
+   INPUTS EN MODAL
+============================ */
+
+.form-label {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.form-control,
+.form-select {
+    font-size: 14px;
+    border-radius: 10px;
+    padding: 10px 12px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+    border-color: #2563eb;
+}
+
+
+/* ============================
+   RESPONSIVE
+============================ */
+
+@media (max-width: 992px) {
+    .pacientes-page {
+        padding: 20px 16px;
+    }
+
+    .pacientes-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .btn-nuevo-paciente {
+        align-self: stretch;
+        justify-content: center;
+    }
+
+    .pacientes-table {
+        font-size: 13px;
+    }
+}

@@ -1,0 +1,40 @@
+/* ==========================================
+   SISTEMA O₂ – VARIABLES DE TEMA
+   Aquí cambias colores, fuentes y sombras
+========================================== */
+
+:root {
+
+    /* ======== Colores Principales ======== */
+    --color-primary: #1D398D;
+    --color-primary-dark: #1a3cb8;
+    --color-primary-light: #ffffff;
+
+    --color-sidebar-bg: #1d398f;
+    --color-sidebar-bg-hover: #1a3fa1;
+    --color-sidebar-active-bg: #ffffff;
+    --color-sidebar-text: #ffffff;
+    --color-sidebar-icon: #ffffff;
+
+    /* ======== Colores neutrales ======== */
+    --color-bg: #ffffff;
+    --color-white: #ffffff;
+    --color-muted: #ffffff;
+    --color-border: #ffffff;
+
+
+    /* ======== Cards ======== */
+    --card-bg: #ffffff;
+    --card-radius: 14px;
+    --card-shadow: 0 2px 8px rgba(0,0,0,0.05);
+
+    /* ======== Sidebar ======== */
+    --sidebar-width: 240px;
+
+    /* ======== Transiciones ======== */
+    --transition: .2s ease-in-out;
+
+}
+  .o2-page {
+    padding: 32px 40px;
+}
