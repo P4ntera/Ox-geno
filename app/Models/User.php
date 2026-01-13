@@ -8,6 +8,10 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
+/**
+ * @method \Illuminate\Support\Collection getRoleNames()
+ */
+
 class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasRoles;

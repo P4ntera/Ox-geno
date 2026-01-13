@@ -8,6 +8,8 @@ use App\Http\Controllers\CentroSaludController;
 use App\Http\Controllers\ArsController;
 use App\Http\Controllers\HabitacionController;
 use App\Http\Controllers\ConsumoOxigenoController;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrdenOxigenoController;
 use App\Http\Controllers\ReporteController;
 use Illuminate\Http\Request;
@@ -34,9 +36,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth','no.cache'])->group(function () {
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
 });
 

@@ -55,8 +55,8 @@
 
             <nav class="menu-list">
 
-                <a href="{{ route('dashboard') }}"
-                    class="menu-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                <a href="{{ route('dashboard.index') }}"
+                    class="menu-item {{ request()->routeIs('dashboard.index') ? 'active' : '' }}">
                     <i data-lucide="layout-dashboard"></i> Inicio
                 </a>
 
