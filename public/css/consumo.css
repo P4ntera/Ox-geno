@@ -6,6 +6,34 @@
     --bg: #f9fafb;
 }
 
+.badge-status {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 9999px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.badge-status.activo {
+    background-color: #d1fae5; /* verde claro */
+    color: #065f46; /* verde oscuro */
+}
+
+.badge-status.finalizado {
+    background-color: #f3f4f6; /* gris claro */
+    color: #1f2937; /* gris oscuro */
+}
+
+.timer {
+    color: #065f46 !important; /* verde oscuro */
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+}
+
+
 /* PAGE */
 .orden-page {
     padding: 20px;
@@ -17,7 +45,6 @@
     padding: 15px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     margin-bottom: 2%;
-
 }
 
 .pacientes-header {
@@ -208,7 +235,9 @@
     width: 90%;
     height: 90%;
     stroke-width: 2;
-    transition: color 0.15s ease, transform 0.15s ease;
+    transition:
+        color 0.15s ease,
+        transform 0.15s ease;
 }
 
 .btn-edit svg {
@@ -217,7 +246,7 @@
 
 .btn-completar svg {
     color: #1658a3; /* verde */
-} 
+}
 
 .btn-delete svg {
     color: #c73b3b; /* rojo */

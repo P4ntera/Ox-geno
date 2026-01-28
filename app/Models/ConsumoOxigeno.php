@@ -15,8 +15,10 @@ class ConsumoOxigeno extends Model
         'id_habitacion',
         'fecha_inicio',
         'fecha_fin',
+        'tiempo_total',
         'volumen_total_litros',
-        'costo_total',
+        'estado_clinico',
+        'flujo_lpm',
         'id_usuario',
     ];
 
@@ -50,4 +52,9 @@ class ConsumoOxigeno extends Model
     {
         return $this->fecha_fin === null ? 'En Proceso' : 'Finalizado';
     }
+    public function estadoDetalle()
+    {
+        return $this->hasOne(EstadoConsumoDetalle::class, 'id_consumo', 'id_consumo');
+    }
+
 }

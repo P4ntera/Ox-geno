@@ -38,7 +38,7 @@
                         <tr>
                             <th>#</th>
                             <th>Nombre de Aseguradora</th>
-                            <th>Precio por Litro</th>
+                            <th>Pago por Litro</th>
                             <th class="text-end">Acciones</th>
                         </tr>
                     </thead>
@@ -49,7 +49,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->nombre }}</td>
-                                <td>RD$ {{ number_format($item->precio_litro) }}</td>
+                                <td>RD$ {{ number_format($item->precio_litro, 1, '.', ',') }}</td>
 
                                 <td class="text-end">
 
@@ -59,11 +59,6 @@
                                         data-nombre="{{ $item->nombre }}" data-precio="{{ $item->precio_litro }}">
                                         <i data-lucide="edit-2"></i>
                                     </button>
-                                    <button class="btn btn-icon-ghost btn-eliminar" data-id="{{ $item->id_ars }}"
-                                        onclick="eliminarARS('{{$item->id_ars}}')">
-                                        <i data-lucide="trash-2"></i>
-                                    </button>
-
                                 </td>
                             </tr>
                         @empty
@@ -104,12 +99,21 @@
 
                             <div class="col-12">
                                 <label class="form-label">Nombre *</label>
-                                <input type="text" class="form-control" id="nombre" name="nombre" required>
+                                <input type="text" class="form-control" id="nombre" name="nombre" 
+                                onkeypress="soloLetras(event,'errorNombre')" required>
+                                <small id="errorNombre" class="text-danger d-none">
+                                    Solo se permiten Letras
+                                </small>
                             </div>
 
                             <div class="col-12">
                                 <label class="form-label">Precio por Litro *</label>
-                                <input type="number" step="1" class="form-control" id="precio" name="precio_litro" required>
+                                <input type="text" class="form-control" min="1" id="precio" name="precio_litro"
+                                    onkeypress="numeroDecimal(event,'errorLitro')" placeholder="0.00"
+                                    onpaste="event.preventDefault()" required>
+                                <small id="errorLitro" class="text-danger d-none">
+                                    Solo se permiten números y 1 punto decimal
+                                </small>
                             </div>
 
                         </div>
@@ -130,9 +134,8 @@
 @endsection
 
 @push('scripts')
+    <script src="{{ asset('js/validaciones.js') }}"></script>
     <script>
-
-
         document.addEventListener("DOMContentLoaded", function () {
 
             const botonesEditar = document.querySelectorAll('.btn-editar');
@@ -159,32 +162,5 @@
 
         lucide.createIcons();
 
-        function eliminarARS(id) {
-            Swal.fire({
-                title: "¿Eliminar ARS?",
-                text: "Esta acción no podrá deshacerse.",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#d33",
-                cancelButtonColor: "#3085d6",
-                confirmButtonText: "Sí, eliminar",
-                cancelButtonText: "Cancelar"
-            }).then((result) => {
-                if (result.isConfirmed) {
-
-                    const form = document.createElement('form');
-                    form.method = 'POST';
-                    form.action = `/ars/${id}`;
-
-                    form.innerHTML = `
-                    @csrf
-                    @method('DELETE')
-                `;
-
-                    document.body.appendChild(form);
-                    form.submit();
-                }
-            });
-        }
     </script>
 @endpush

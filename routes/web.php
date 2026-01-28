@@ -12,13 +12,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrdenOxigenoController;
 use App\Http\Controllers\ReporteController;
+use App\Http\Controllers\ReporteConsumoControllerl;
+use App\Http\Controllers\EstadoConsumoController;
 use Illuminate\Http\Request;
 use Symfony\Component\Routing\Route as RoutingRoute;
 
 //----------------------------------------------------------------------------------------------------------------------------
 // LOGIN
 
-Route::middleware(['guest','no.cache'])->group(function () {
+Route::middleware(['guest', 'no.cache'])->group(function () {
 
     Route::get('/', [LoginController::class, 'showLogin'])->name('login');
     Route::post('/login', [LoginController::class, 'login'])->name('login.submit');
@@ -34,7 +36,7 @@ Route::middleware('auth')->group(function () {
 //----------------------------------------------------------------------------------------------------------------------------
 // Dashboard
 
-Route::middleware(['auth','no.cache'])->group(function () {
+Route::middleware(['auth', 'no.cache'])->group(function () {
 
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
@@ -43,7 +45,7 @@ Route::middleware(['auth','no.cache'])->group(function () {
 //----------------------------------------------------------------------------------------------------------------------------
 // ====== PACIENTES ======
 
-Route::middleware(['auth','no.cache'])->group(function () {
+Route::middleware(['auth', 'no.cache'])->group(function () {
 
     Route::get('/pacientes', [PacienteController::class, 'index'])->name('pacientes.index');
 
@@ -53,7 +55,7 @@ Route::middleware(['auth','no.cache'])->group(function () {
 //----------------------------------------------------------------------------------------------------------------------------
 // ====== REPORTES ======
 
-Route::prefix('reportes')->middleware(['auth','no.cache'])->group(function () {
+Route::middleware(['auth', 'no.cache'])->group(function () {
 
     Route::get('/consumo-oxigeno', [ReporteController::class, 'index'])
         ->name('reportes.index');
@@ -63,7 +65,7 @@ Route::prefix('reportes')->middleware(['auth','no.cache'])->group(function () {
 //----------------------------------------------------------------------------------------------------------------------------
 // ====== USUARIOS =====//
 
-Route::prefix('usuario')->middleware(['auth','no.cache'])->group(function () {
+Route::middleware(['auth', 'no.cache'])->group(function () {
 
     Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuario.index');
 
@@ -79,7 +81,7 @@ Route::prefix('usuario')->middleware(['auth','no.cache'])->group(function () {
 //----------------------------------------------------------------------------------------------------------------------------
 // ====== ASEGURADORAS ======
 
-Route::prefix('ars')->middleware(['auth','no.cache'])->group(function () {
+Route::middleware(['auth', 'no.cache'])->group(function () {
 
     Route::get('/ars', [ArsController::class, 'index'])->name('ars.index');
 
@@ -91,7 +93,7 @@ Route::prefix('ars')->middleware(['auth','no.cache'])->group(function () {
 //----------------------------------------------------------------------------------------------------------------------------
 // ====== CENTRO DE SALUD ======
 
-Route::middleware(['auth','no.cache'])->group(function () {
+Route::middleware(['auth', 'no.cache'])->group(function () {
 
     Route::get('/centros-salud', [CentroSaludController::class, 'index'])->name('centrosalud.index');
 
@@ -101,28 +103,41 @@ Route::middleware(['auth','no.cache'])->group(function () {
 //---------------------------------------------------------------------------------------------------------------------------
 // ====== HABITACIONES ======
 
-Route::middleware(['auth','no.cache'])->group(function () {
+Route::middleware(['auth', 'no.cache'])->group(function () {
 
     Route::get('/habitaciones', [HabitacionController::class, 'index'])->name('habitaciones.index');
 
     Route::post('/habitaciones/store', [HabitacionController::class, 'store'])->name('habitaciones.store');
-
-    Route::post('/habitaciones/destroy', [HabitacionController::class, 'destroy'])->name('habitaciones.destroy');
 });
 //----------------------------------------------------------------------------------------------------------------------------
 // ====== CONSUMO O2 ======
 
-Route::prefix('consumo')->middleware(['auth','no.cache'])->group(function () {
+Route::middleware(['auth', 'no.cache'])->group(function () {
 
     Route::get('/consumo', [ConsumoOxigenoController::class, 'index'])->name('consumo.index');
 
     Route::post('/store', [ConsumoOxigenoController::class, 'store'])->name('consumo.store');
+
+    Route::post('/consumo/{id}/finalizar', [ConsumoOxigenoController::class, 'finalizar'])
+        ->name('consumo.finalizar');
+
+});
+
+//----------------------------------------------------------------------------------------------------------------------------
+// ====== ESTADO CONSUMO ======
+
+Route::middleware(['auth', 'no.cache'])->group(function () {
+
+    Route::get('/estado', [EstadoConsumoController::class, 'index'])->name('estado.index');
+
+    Route::post('/estado/store', [EstadoConsumoController::class, 'store'])->name('estado.store');
+
 });
 
 //----------------------------------------------------------------------------------------------------------------------------
 // ====== Orden Oxigeno ======
 
-Route::middleware(['auth','no.cache'])->group(function () {
+Route::middleware(['auth', 'no.cache'])->group(function () {
 
     Route::get('/ordenes-oxigeno', [OrdenOxigenoController::class, 'index'])->name('ordenes.index');
 
@@ -132,5 +147,27 @@ Route::middleware(['auth','no.cache'])->group(function () {
 
     Route::put('/ordenes/{id}/cancelar', [OrdenOxigenoController::class, 'cancelar'])->name('ordenes.cancelar');
 
-});    
+});
+
+//-------------------------------------------------------------------------------------------------------------------------------
+//===== Estado Consumo y Detalles ======
+Route::middleware(['auth', 'no.cache'])->group(function () {
+
+    Route::get(
+        '/estado-consumo',
+        [EstadoConsumoController::class, 'index']
+    )->name('estado_consumo.index');
+
+    Route::post('/estado-consumo/seleccionar', [EstadoConsumoController::class, 'seleccionarPaciente'])
+        ->name('estado_consumo.seleccionar');
+
+    Route::post('/estado-consumo/cerrar', [EstadoConsumoController::class, 'cerrar'])
+        ->name('estado_consumo.cerrar');
+
+    Route::get(
+        '/estado-consumo/resumen',
+        [EstadoConsumoController::class, 'resumen']
+    )->name('estado_consumo.resumen');
+
+});
 

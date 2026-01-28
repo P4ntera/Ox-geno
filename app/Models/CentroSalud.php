@@ -16,6 +16,7 @@ class CentroSalud extends Model
         'ciudad_centro',
         'telefono_centro',
         'pisos',
-        'habitaciones'
+        'habitaciones',
+        'pago_litro'
     ];
 }

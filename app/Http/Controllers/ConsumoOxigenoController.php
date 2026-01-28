@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ConsumoOxigenoController extends Controller
-{   
+{
     public function index()
     {
         $consumos = ConsumoOxigeno::with(['orden.paciente', 'habitacion'])
@@ -24,8 +24,6 @@ class ConsumoOxigenoController extends Controller
             ->where('estado', 'Activa')
             ->get();
 
-        //dd($consumos);
-
         return view('consumo', compact(
             'consumos',
             'pacientes',
@@ -36,25 +34,30 @@ class ConsumoOxigenoController extends Controller
 
     public function store(Request $request)
     {
-
-        dd($request->all());
-
-        $v3 = 
+        //dd($request->all());
 
         $request->validate([
-            'flujo' => 'required|numeric|min:0.5',
-            'piso' => 'required',
-            'habitacion' => 'required',
+            'id_habitacion' => 'required',
+            'id_orden' => 'required',
+            'id_paciente' => 'required',
+            'flujo_lpm' => 'required|numeric|min:0.5|max:15'
+
         ]);
 
-        
+        $consumoExistente = ConsumoOxigeno::where('id_orden', $request->id_orden)
+            ->whereNull('fecha_fin')
+            ->first();
+
+        if ($consumoExistente) {
+            return back()->with('error', 'Este paciente ya tiene un consumo de oxígeno activo. Debe finalizar antes de crear un nuevo consumo.');
+        }
 
         $consumo = ConsumoOxigeno::create([
-            'id_orden' => $request->paciente_id, // ajusta si usas orden clínica
-            'id_habitacion' => $request->habitacion,
+            'id_orden' => $request->id_orden, // ajusta si usas orden clínica
+            'id_habitacion' => $request->id_habitacion,
+            'flujo_lpm' => $request->flujo_lpm,
             'fecha_inicio' => now(),
             'volumen_total_litros' => 0,
-            'costo_total' => 0,
             'id_usuario' => Auth::id(),
         ]);
 
@@ -63,24 +66,38 @@ class ConsumoOxigenoController extends Controller
 
     public function finalizar($id)
     {
+        //dd($id);        
+
         $consumo = ConsumoOxigeno::findOrFail($id);
 
-        if ($consumo->fecha_fin) {
-            return back()->with('error', 'Este consumo ya fue finalizado.');
-        }
+        // if ($consumo->fecha_fin) {
+        //     return back()->with('error', 'Este consumo ya fue finalizado.');
+        // }
 
         $fin = now();
         $minutos = $consumo->fecha_inicio->diffInMinutes($fin);
 
-        // ⚠️ Ajusta el flujo real si lo manejas en otra tabla
-        $flujo = 5;
-        $litros = $minutos * $flujo;
+        //dd($minutos);
 
+        $fio2 = OrdenOxigeno::where('id_orden', $id)->value('fio2');
+        $flujo = $consumo->flujo_lpm;
+        //dd($fio2);
+
+        $litros = $minutos * $flujo;
+        //dd(round($litros, 2));
+        //dd($litros);
         $consumo->update([
             'fecha_fin' => $fin,
+            'tiempo_total' => $minutos,
             'volumen_total_litros' => round($litros, 2),
-            'costo_total' => 0, // aquí luego aplicas ARS
+            'estado_clinico' => 0
+
         ]);
+
+        //dd($consumo->id_orden);
+
+        // OrdenOxigeno::where('id_orden', $consumo->id_orden)
+        //     ->update(['estado' => 'Completada']);
 
         return back()->with('success', 'Consumo finalizado correctamente.');
     }

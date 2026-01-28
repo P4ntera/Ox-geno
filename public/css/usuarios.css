@@ -269,3 +269,11 @@
     justify-content: center;
   }
 }
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}

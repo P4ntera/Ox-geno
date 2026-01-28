@@ -95,13 +95,29 @@
                 <div class="step">
                     <div class="step-number">2</div>
                     <div>
+                        <p class="step-title">Registrar Orden</p>
+                        <p class="step-desc">Agregue los datos en la sección "Orden".</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div>
                         <p class="step-title">Registrar Consumo</p>
                         <p class="step-desc">Ingrese el consumo en "Consumo O₂".</p>
                     </div>
                 </div>
 
                 <div class="step">
-                    <div class="step-number">3</div>
+                    <div class="step-number">4</div>
+                    <div>
+                        <p class="step-title">Estado de Consumo</p>
+                        <p class="step-desc">Dar el alta al paciente en "Estado de Consumo".</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">5</div>
                     <div>
                         <p class="step-title">Ver Reportes</p>
                         <p class="step-desc">Consulte reportes por paciente o fecha.</p>
@@ -122,7 +138,7 @@
 
             <div class="info-row">
                 <span class="label">Última Actualización</span>
-                <span>Noviembre 2025</span>
+                <span>Febrero 2026</span>
             </div>
 
             <div class="info-row">

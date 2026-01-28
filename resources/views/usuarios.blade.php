@@ -34,7 +34,7 @@
       {{-- BUSCADOR --}}
       <div class="usuarios-search">
         <i data-lucide="search" class="search-icon"></i>
-        <input type="text" id="buscador" class="search-input" placeholder="Buscar por nombre, usuario o rol..."
+        <input type="text" id="buscador" class="search-input" placeholder="Buscar por nombre o usuario..."
           onkeyup="filtrarUsuarios()">
       </div>
 
@@ -109,13 +109,17 @@
 
               <div class="col-md-6">
                 <label for="name" class="form-label">Nombre Completo*</label>
-                <input type="text" class="form-control" id="name" name="name" required>
+                <input type="text" class="form-control" id="name" name="name" onkeypress="soloLetras(event,'errorNombre')"
+                  placeholder="Maria Antonia" required>
+                <small id="errorNombre" class="text-danger d-none">
+                  Solo se permiten letras
+                </small>
               </div>
 
               <div class="col-md-3">
                 <label>Usuario *</label>
                 <input type="text" id="user" name="user" class="form-control @error('user') is-invalid @enderror"
-                  value="{{ old('user') }}" onkeyup="verificarUsuarioDisponible()" required>
+                  value="{{ old('user') }}" oninput="verificarUsuarioDisponible()" placeholder="MAntonia123" required>
 
                 <div id="user-feedback" class="invalid-feedback d-none"></div>
               </div>
@@ -133,8 +137,8 @@
               <div class="col-md-2">
                 <label for="status" class="form-label">Estado *</label>
                 <select id="status" name="status" class="form-select" required>
-                  <option value="activo">Activo</option>
-                  <option value="inactivo">Inactivo</option>
+                  <option value="1">Activo</option>
+                  <option value="0">Inactivo</option>
                 </select>
               </div>
 
@@ -154,7 +158,7 @@
 
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-primary">Guardar Usuario</button>
+            <button type="submit" id="btn-guardar" class="btn btn-primary">Guardar Usuario</button>
           </div>
         </div>
       </form>
@@ -163,6 +167,8 @@
 @endsection
 
 @push('scripts')
+
+  <script src="{{ asset('js/validaciones.js') }}"></script>
 
   <script>
     let timeout;
@@ -189,6 +195,7 @@
               feedback.classList.remove("d-none", "invalid-feedback");
               feedback.classList.remove("text-success");
               feedback.textContent = "Usuario disponible";
+              document.getElementById('btn-guardar').disabled = false;
 
             } else {
               input.classList.remove("is-valid");
@@ -196,9 +203,10 @@
               feedback.classList.remove("d-none", "valid-feedback");
               feedback.classList.remove("text-success");
               feedback.textContent = "Usuario no disponible";
+              document.getElementById('btn-guardar').disabled = true;
             }
           });
-      }, 300); // debounce
+      }, 100); // debounce
     }
 
   </script>
@@ -207,35 +215,73 @@
 
   <!-- Validación de Contraseña y confirm Password-->
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
+    let passwordValida = true; // true porque pueden ir vacías
 
-      const form = document.getElementById("formUsuario"); // cambia el ID por el de tu formulario real
-      const password = document.getElementById("password");
-      const confirmPassword = document.getElementById("confirmPassword");
+    function validarPasswords() {
+      const pass = document.getElementById('password');
+      const confirm = document.getElementById('confirmPassword');
+      const btn = document.getElementById('btn-guardar');
 
-      form.addEventListener("submit", function (e) {
+      const p1 = pass.value;
+      const p2 = confirm.value;
 
-        // Si ambos campos tienen algo, validamos
-        if (password.value !== "" || confirmPassword.value !== "") {
+      // reset clases
+      pass.classList.remove('is-valid', 'is-invalid');
+      confirm.classList.remove('is-valid', 'is-invalid');
 
-          if (password.value !== confirmPassword.value) {
+      // Caso 1: ambas vacías → permitido
+      if (p1 === '' && p2 === '') {
+        passwordValida = true;
+        btn.disabled = false;
+        return;
+      }
 
-            confirmPassword.classList.add("is-invalid");
+      // Caso 2: una escrita y la otra no
+      if (p1 === '' || p2 === '') {
+        passwordValida = false;
+        btn.disabled = true;
+        return;
+      }
 
-            e.preventDefault(); // Detiene el envío del formulario
-            return false;
-          }
-        }
-        // Si todo bien, quitar errores
-        confirmPassword.classList.remove("is-invalid");
-      });
+      // Caso 3: longitud mínima
+      if (p1.length < 6) {
+        passwordValida = false;
+        pass.classList.add('is-invalid');
+        btn.disabled = true;
+        return;
+      }
 
+      // Caso 4: no coinciden
+      if (p1 !== p2) {
+        passwordValida = false;
+        confirm.classList.add('is-invalid');
+        btn.disabled = true;
+        return;
+      }
+
+      // Caso 5: todo OK
+      passwordValida = true;
+      pass.classList.add('is-valid');
+      confirm.classList.add('is-valid');
+      btn.disabled = false;
+    }
+
+    // Escuchar cambios
+    document.getElementById('password').addEventListener('input', validarPasswords);
+    document.getElementById('confirmPassword').addEventListener('input', validarPasswords);
+
+    // Bloqueo extra por seguridad
+    document.querySelector('form').addEventListener('submit', function (e) {
+      if (!passwordValida) {
+        e.preventDefault();
+        alert('La contraseña no cumple los requisitos');
+      }
     });
   </script>
 
   <!-- Fin Validación de Contraseña y confirm Password -->
 
-  
+
   <!-- Modulo de editar -->
 
   <script>
@@ -250,8 +296,8 @@
           document.getElementById('usuario_id').value = this.dataset.id;
           document.getElementById('name').value = this.dataset.nombre;
           document.getElementById('user').value = this.dataset.usuario;
-          
-          document.getElementById('status').value = this.dataset.status == '1' ? 'activo' : 'inactivo';
+
+          document.getElementById('status').value = this.dataset.status;
 
           document.getElementById('password').value = '';
           document.getElementById('confirmPassword').value = '';
@@ -266,7 +312,7 @@
 
         // Limpiar validaciones
         document.getElementById('user').classList.remove("is-valid", "is-invalid");
-        document.getElementById('user-feedback').classList.add("d-none"); 
+        document.getElementById('user-feedback').classList.add("d-none");
       });
     });
 

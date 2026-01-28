@@ -25,6 +25,7 @@ class CentroSaludController extends Controller
             'telefono_centro' => 'required|string|max:20',
             'pisos' => 'required|integer|min:1',
             'habitaciones' => 'nullable|integer|min:0', // si lo usas
+            'pago_litro' => 'required|numeric|min:0',
         ]);
 
         // SI LLEGA id_centro → ACTUALIZAR

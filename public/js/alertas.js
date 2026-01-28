@@ -101,3 +101,55 @@ function alertaHabitacionRequerida() {
 }
 
 // FIN DE ALERTAS DE LAS ORDENES
+
+// Alertas de success, errores y advertencias 
+
+function alertSuccess(message) {
+    Swal.fire({
+        icon: 'success',
+        title: 'Éxito',
+        text: message,
+        confirmButtonColor: '#16a34a'
+    });
+}
+
+function alertError(message) {
+    Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: message,
+        confirmButtonColor: '#dc2626'
+    });
+}
+
+function alertWarning(message) {
+    Swal.fire({
+        icon: 'warning',
+        title: 'Advertencia',
+        text: message,
+        confirmButtonColor: '#f59e0b'
+    });
+}
+
+// Fin alertas de success, errores y advertencias 
+
+//Cerrar Consumo
+
+function cerrarConsumo(id) {
+     Swal.fire({
+        title: '¿Cerrar consumos?',
+        text: 'Esto cerrará los consumos mostrados y solo podrá verlos en el módulo de REPORTES.',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#dc3545',
+        cancelButtonColor: '#6c757d',
+        confirmButtonText: 'Sí, cerrar y generar PDF',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            document.getElementById('formCerrarConsumo').submit();
+        }
+    });
+}
+
+//Fin Cerrar Consumo

@@ -14,6 +14,7 @@ class Habitacion extends Model
         'id_centro',
         'piso',
         'numero_habitacion',
+        'estado',
     ];
 
     public function centro()

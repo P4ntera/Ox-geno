@@ -1,3 +1,21 @@
+.badge-status {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 9999px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.badge-status.activo {
+    background-color: #d1fae5; /* verde claro */
+    color: #065f46; /* verde oscuro */
+}
+
+.badge-status.inactivo {
+    background-color: #f3f4f6; /* gris claro */
+    color: #1f2937; /* gris oscuro */
+}
+
 .habitaciones-page {
     padding: 32px 40px;
 }
@@ -60,7 +78,7 @@
     background: #fff;
     padding: 20px;
     border-radius: 18px;
-    box-shadow: 0 15px 40px rgba(0,0,0,.05);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
 }
 
 /* Buscador */
@@ -96,10 +114,12 @@
     padding: 12px;
     font-weight: 600;
     border-bottom: 1px solid #e5e7eb;
+    text-align: center;
 }
 
 .habitaciones-table td {
     padding: 12px;
+    text-align: center;
 }
 
 .habitaciones-table tbody tr:hover {

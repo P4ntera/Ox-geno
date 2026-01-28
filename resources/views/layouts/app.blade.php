@@ -70,14 +70,19 @@
                     <i data-lucide="wind"></i> Consumo O₂
                 </a>
 
-                <a href="{{ route('pacientes.index') }}"
-                    class="menu-item {{ request()->routeIs('pacientes.*') ? 'active' : '' }}">
-                    <i data-lucide="user-plus"></i> Pacientes
+                <a href="{{ route('estado_consumo.index') }}"
+                    class="menu-item {{ request()->routeIs('estado_consumo.*') ? 'active' : '' }}">
+                    <i data-lucide="calculator"></i> Estado de Consumo
                 </a>
 
                 <a href="{{ route('reportes.index') }}"
                     class="menu-item {{ request()->routeIs('reportes.*') ? 'active' : '' }}">
                     <i data-lucide="file-text"></i> Reportes
+                </a>
+                
+                <a href="{{ route('pacientes.index') }}"
+                    class="menu-item {{ request()->routeIs('pacientes.*') ? 'active' : '' }}">
+                    <i data-lucide="user-plus"></i> Pacientes
                 </a>
 
                 <a href="{{ route('usuario.index') }}"
@@ -85,7 +90,8 @@
                     <i data-lucide="users"></i> Usuarios
                 </a>
 
-                <a href="{{ route('ars.index') }}" class="menu-item {{ request()->routeIs('ars.*') ? 'active' : '' }}">
+                <a href="{{ route('ars.index') }}"
+                    class="menu-item {{ request()->routeIs('ars.*') ? 'active' : '' }}">
                     <i data-lucide="shield"></i> Aseguradoras
                 </a>
 
@@ -97,7 +103,8 @@
                         <i data-lucide="chevron-down" class="dropdown-arrow"></i>
                     </a>
 
-                    <div id="centrosDropdown" class="dropdown-submenu 
+                    <div id="centrosDropdown"
+                        class="dropdown-submenu 
         {{ request()->routeIs('centrosalud.*') || request()->routeIs('habitaciones.*') ? 'open' : '' }}">
 
                         <a href="{{ route('centrosalud.index') }}"

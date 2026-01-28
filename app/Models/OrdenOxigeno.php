@@ -19,8 +19,6 @@ class OrdenOxigeno extends Model
         'v3',
         'relacion_ie',
         'fio2',
-        'tiempo',
-        'id_ars',
         'estado',
         'created_at',
         'updated_at',
@@ -36,10 +34,5 @@ class OrdenOxigeno extends Model
     public function usuario()
     {
         return $this->belongsTo(User::class, 'id_usuario');
-    }
-
-    public function ars()
-    {
-        return $this->belongsTo(Ars::class, 'id_ars');
     }
 }

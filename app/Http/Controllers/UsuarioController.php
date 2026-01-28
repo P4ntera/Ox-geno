@@ -12,10 +12,11 @@ use Illuminate\Validation\Rule;
 class UsuarioController extends Controller
 {
     public function index()
-    {
+    { 
         $usuarios = User::with('roles')->get(); // importante
         //dd($usuarios);
         return view('usuarios', compact('usuarios'));
+
     }
 
     public function store(Request $request)
@@ -30,20 +31,20 @@ class UsuarioController extends Controller
                     'string',
                     Rule::unique('users', 'user')->ignore($request->id),
                 ],
-                'password' => 'nullable|min:4',
+                'password' => 'nullable|min:6',
                 'status' => 'required'
             ],
             [
                 'user.unique' => 'Este usuario ya se encuentra registrado, intente otro.'
             ]
         );
-        $validatedData['status'] = $request->input('status') === 'activo' ? 1 : 0;
-
 
         if ($request->id) {
-            $user = User::find($request->id);
+            $user = User::find($request->id, ['*']);
+
             //dd($user);
 
+            //si el request tiene password, actualizarlo si no, mantener el actual
             if ($request->filled('password')) {
                 $validatedData['password'] = Hash::make($request->password);
             } else {
@@ -56,19 +57,19 @@ class UsuarioController extends Controller
             $user->syncRoles([$request->rol]); //asignar rol
 
             return redirect()
-                ->route('usuarios.index')
+                ->route('usuario.index')
                 ->with('success', 'Paciente guardado exitosamente.');
 
         } else {
             // Crear nuevo usuario
-            $validatedData['password'] = Hash::make($validatedData['password']);
-            $user = User::create($validatedData);
-            $user->assignRole($request->rol);
+            $validatedData['password'] = Hash::make($validatedData['password']); //hashear password
+            $user = User::create($validatedData); //crear usuario
+            $user->assignRole($request->rol); //asignar rol
 
         }
 
         return redirect()
-            ->route('usuarios.index')
+            ->route('usuario.index')
             ->with('success', 'Paciente guardado exitosamente.');
     }
 }

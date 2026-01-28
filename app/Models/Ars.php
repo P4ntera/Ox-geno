@@ -14,4 +14,6 @@ class Ars extends Model
         'nombre',
         'precio_litro',
     ];
+
+    
 }
